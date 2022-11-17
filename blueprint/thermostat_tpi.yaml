@@ -66,8 +66,6 @@ trigger:
     minutes: "/10"
   - platform: state
     entity_id: !input entity_consigne
-  - platform: state
-    entity_id: !input entity_fenetre
 
 
 action:
@@ -76,8 +74,7 @@ action:
       entity_consigne: !input entity_consigne
       consigne: "{{states(entity_consigne)}}"
       temp_ext: '{{ states(entity_temp_ext) }}'
-      temp_int: '{{ states(entity_temp_int) }}'
-      fenetre: '{{states(entity_fenetre)}}'     
+      temp_int: '{{ states(entity_temp_int) }}'    
       puissance: >-
         {%set val = coeff_c * (consigne - temp_int) + coeff_t * (consigne -
         temp_ext) %}  {% if val > 1 and fenetre == 'off' %} {% set val = 100 %}  {% elif val < 0 or
