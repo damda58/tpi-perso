@@ -59,7 +59,6 @@ variables:
   coeff_t: !input coeff_t
   entity_temp_int: !input entity_temp_int
   entity_temp_ext: !input entity_temp_ext
-  entity_fenetre: !input entity_fenetre
 
 trigger:
   - platform: time_pattern
@@ -77,8 +76,7 @@ action:
       temp_int: '{{ states(entity_temp_int) }}'    
       puissance: >-
         {%set val = coeff_c * (consigne - temp_int) + coeff_t * (consigne -
-        temp_ext) %}  {% if val > 1 and fenetre == 'off' %} {% set val = 100 %}  {% elif val < 0 or
-        fenetre == 'on' %} {% set val = 0 %}  {% else %} {% set val = ( (val *
+        temp_ext) %}  {% if val > 1 %} {% set val = 100 %}  {% elif val < 0 %} {% set val = 0 %}  {% else %} {% set val = ( (val *
         100) | round(0)) %} {% endif %} {{val}}
       temps_chauffe: '{{ puissance * 6 }}'
   - alias: Met à jour l'indicateur de puissance
