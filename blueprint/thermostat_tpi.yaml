@@ -62,7 +62,7 @@ variables:
 
 trigger:
   - platform: time_pattern
-    minutes: "/10"
+    minutes: "/30"
   - platform: state
     entity_id: !input entity_consigne
 
